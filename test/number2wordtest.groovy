@@ -12,6 +12,8 @@ class Number2WordTest extends Specification {
         digit | word
         1 | "one"
         2 | "two"
+        3 | "three"
+        4 | "four"
 
     }
 }
