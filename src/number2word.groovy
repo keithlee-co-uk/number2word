@@ -1,15 +1,11 @@
 public class Number2Word {
-    public Number2Word() {
-    }
+    Number2Word() {
 
-    public word(int number){
-        if(number == 1)
-            return "one"
-        else if(number == 2)
-            return "two"
-        else if(number == 3)
-        return "three"
-        else
-            return "four"
+        }
+
+    def words(int number){
+        def singles = ["zero", "one", "two", "three", "four"]
+        return singles.get(number)
+
     }
 }

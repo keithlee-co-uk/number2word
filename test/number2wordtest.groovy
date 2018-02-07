@@ -6,7 +6,7 @@ class Number2WordTest extends Specification {
 
     def "Single digit numbers become words"() {
         expect:
-        n2w.word(digit) == word
+        n2w.words(digit) == word
 
         where:
         digit | word
