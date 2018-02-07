@@ -1,15 +1,17 @@
 import spock.lang.Specification
 
+
 class Number2WordTest extends Specification {
+    def n2w = new Number2Word()
 
-    def "A failing test to be sure I have the test environment correct"() {
-        def two = 3
+    def "Single digit numbers become words"() {
+        expect:
+        n2w.word(digit) == word
 
-        when:
-        def four = two + two
+        where:
+        digit | word
+        1 | "one"
 
-        then:
-        four == 4
 
     }
 }
