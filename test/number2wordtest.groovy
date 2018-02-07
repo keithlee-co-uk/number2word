@@ -11,7 +11,7 @@ class Number2WordTest extends Specification {
         where:
         digit | word
         1 | "one"
-
+        2 | "two"
 
     }
 }
