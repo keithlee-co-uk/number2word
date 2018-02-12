@@ -30,9 +30,21 @@ class Number2WordTest extends Specification {
      999999999  | ["999", "999", "999"]
     }
 
-    
+
+    /* Assumption 2 */
+    def "Throw NumberOutOfBounds Exception when 'number' is negative"() {
+
+        when:
+        n2w.words(-1)
+
+        then:
+        NumberOutOfBounds ex = thrown()
+        ex.message == 'Expected a positive integer less than a billion.'
+    }
+
+
     /* Assumption 3 */
-    def "Throw exception for values over a billion"() {
+    def "Throw NumberOutOfBounds exception for values over a billion"() {
 
         when:
         n2w.words(1000000000)
