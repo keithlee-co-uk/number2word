@@ -7,7 +7,7 @@ class Number2WordTest extends Specification {
     /** Zero Rule **/
     def "Value is 0 then the words is 'zero' "() {
         expect:
-        n2w.words(digit) == word
+        n2w.number2Words(digit) == word
 
         where:
         digit | word
@@ -31,11 +31,20 @@ class Number2WordTest extends Specification {
     }
 
 
+    /* Assumption 1 */
+    def "Throw Exception when 'number' is not an integer"() {
+        when:
+        n2w.number2Words("Fred")
+
+        then:
+        thrown(MissingMethodException)
+
+    }
+
     /* Assumption 2 */
     def "Throw NumberOutOfBounds Exception when 'number' is negative"() {
-
         when:
-        n2w.words(-1)
+        n2w.number2Words(-1)
 
         then:
         NumberOutOfBounds ex = thrown()
@@ -47,7 +56,7 @@ class Number2WordTest extends Specification {
     def "Throw NumberOutOfBounds exception for values over a billion"() {
 
         when:
-        n2w.words(1000000000)
+        n2w.number2Words(1000000000)
 
         then:
         NumberOutOfBounds ex = thrown()
@@ -56,7 +65,17 @@ class Number2WordTest extends Specification {
     }
 
     /** Hundreds Rule **/
-    /*def ""(){
+    /*  */
+    def "If the hundreds portion of a three-digit group is not zero, the number of hundreds is added as a word."() {
+        expect:
+        n2w.hundredthsWord(hundredSet) == word
 
-    }*/
+        where:
+        word | hundredSet
+        ""   | "001"
+        "nine"  | "999"
+        "seven" | "781"
+        "four"  | "499"
+    }
+
  }

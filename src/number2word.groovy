@@ -1,13 +1,13 @@
 
 class Number2Word {
+    def unitMap = ['', "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
-
-    def words(int number){
+    def number2Words(int number){
         if(number == 0){
             return "zero"
         }
 
-        if(number > 999999999) {
+        if(number > 999999999 || number < 0) {
             throw new NumberOutOfBounds('Expected a positive integer less than a billion.')
         }
 
@@ -15,7 +15,9 @@ class Number2Word {
 
     def splitToThreeDigits(int number) {
         def hundredGroups = []
+        // TODO: breakout regex to clearer/explicitly named method eg matchThree()
         def hundredGroupsReversed = number.toString().reverse().split("(?<=\\G...)")
+
         for(numberSet in hundredGroupsReversed) {
             if (numberSet.size() < 3) {
                 numberSet = numberSet.padRight(3, "0")
@@ -23,6 +25,11 @@ class Number2Word {
             hundredGroups.add(numberSet.reverse())
         }
         return hundredGroups
+    }
+
+    def hundredthsWord(String threeSet) {
+        def hundredthDigit = threeSet.substring(0, 1) as int
+        return unitMap[hundredthDigit]
     }
 }
 
