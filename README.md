@@ -9,7 +9,7 @@ convert digits to English words (TDD practice &amp; learning)
 ## Assumptions
 * 'number' is an integer
 * 'number' is positive
-* a 'number', a billion or over, will not be converted
+* 'number's, a billion or over, will not be converted
 
 ## Example input to outputs
 * 1 = one

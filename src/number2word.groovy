@@ -7,9 +7,13 @@ class Number2Word {
             return "zero"
         }
 
+        if(number > 999999999) {
+            throw new NumberOutOfBounds('Expected a positive integer less than a billion.')
+        }
+
     }
 
-    def splitToHundreds(int number) {
+    def splitToThreeDigits(int number) {
         def hundredGroups = []
         def hundredGroupsReversed = number.toString().reverse().split("(?<=\\G...)")
         for(numberSet in hundredGroupsReversed) {
@@ -19,5 +23,20 @@ class Number2Word {
             hundredGroups.add(numberSet.reverse())
         }
         return hundredGroups
+    }
+}
+
+
+class NumberOutOfBounds extends Exception{
+    public String message
+
+    NumberOutOfBounds(String message){
+        this.message = message
+    }
+
+
+    @Override
+    String getMessage(){
+        return message
     }
 }
