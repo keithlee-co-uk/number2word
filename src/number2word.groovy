@@ -1,4 +1,5 @@
-public class Number2Word {
+
+class Number2Word {
 
 
     def words(int number){
@@ -10,9 +11,13 @@ public class Number2Word {
 
     def splitToHundreds(int number) {
         def hundredGroups = []
-        def stringNUmber = number.toString()
-        hundredGroups.add(stringNUmber.padLeft(3, "0"))
-
+        def hundredGroupsReversed = number.toString().reverse().split("(?<=\\G...)")
+        for(numberSet in hundredGroupsReversed) {
+            if (numberSet.size() < 3) {
+                numberSet = numberSet.padRight(3, "0")
+            }
+            hundredGroups.add(numberSet.reverse())
+        }
         return hundredGroups
     }
 }

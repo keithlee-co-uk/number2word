@@ -16,11 +16,13 @@ class Number2WordTest extends Specification {
 
     def "value is split into groups of three digits starting from the right-hand side"() {
         expect:
-        n2w.splitToHundreds(integer) == integerList
+        n2w.splitToHundreds(integer) == stringList
 
         where:
-        integer | integerList
+        integer | stringList
              1  | ["001"]
-
+            50  | ["050"]
+           999  | ["999"]
+          1000  | ["000", "001"]
     }
  }
