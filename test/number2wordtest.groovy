@@ -78,4 +78,17 @@ class Number2WordTest extends Specification {
         "four"  | "499"
     }
 
+    def "If the three-digit group is exactly divisible by one hundred, the text 'hundred' is appended"() {
+        expect:
+        n2w.hundredthsWord(hundredSet) == words
+
+        where:
+        words | hundredSet
+        "one hundred"   | "100"
+        "two hundred"   | "200"
+        "three hundred" | "300"
+        "nine hundred"  | "900"
+    }
+
+
  }
