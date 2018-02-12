@@ -13,4 +13,14 @@ class Number2WordTest extends Specification {
         0 | "zero"
 
     }
+
+    def "value is split into groups of three digits starting from the right-hand side"() {
+        expect:
+        n2w.splitToHundreds(integer) == integerList
+
+        where:
+        integer | integerList
+             1  | ["001"]
+
+    }
  }
