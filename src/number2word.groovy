@@ -28,8 +28,14 @@ class Number2Word {
     }
 
     def hundredthsWord(String threeSet) {
+        def hundredthsWords = ""
+        if((threeSet as int).mod(100) == 0)
+            hundredthsWords = " hundred"
+
         def hundredthDigit = threeSet.substring(0, 1) as int
-        return unitMap[hundredthDigit]
+        hundredthsWords = unitMap[hundredthDigit] + hundredthsWords
+        return hundredthsWords
+
     }
 }
 

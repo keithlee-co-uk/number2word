@@ -67,15 +67,16 @@ class Number2WordTest extends Specification {
     /** Hundreds Rule **/
     /*  */
     def "If the hundreds portion of a three-digit group is not zero, the number of hundreds is added as a word."() {
+        /* If the three-digit group is not exactly divisible by one hundred, the text 'hundred and' is appended*/
         expect:
         n2w.hundredthsWord(hundredSet) == word
 
         where:
         word | hundredSet
         ""   | "001"
-        "nine"  | "999"
-        "seven" | "781"
-        "four"  | "499"
+        "nine hundred and"  | "999"
+        "seven hundred and" | "781"
+        "four hundred and"  | "499"
     }
 
     def "If the three-digit group is exactly divisible by one hundred, the text 'hundred' is appended"() {
@@ -89,6 +90,5 @@ class Number2WordTest extends Specification {
         "three hundred" | "300"
         "nine hundred"  | "900"
     }
-
 
  }
