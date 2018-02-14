@@ -1,6 +1,7 @@
 
 class Number2Word {
-    def unitMap = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+    def unitMap = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven",
+                   "twelve", "thirteen","fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
     def tenMap = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
 
     def number2Words(int number){
@@ -44,14 +45,23 @@ class Number2Word {
 
     def tenWord(String threeSet) {
         def tenWords = ""
+        def unitWord = ""
+
         def tenDigit = threeSet[1..1] as int
         def unitDigit = threeSet[2..2] as int
-        def unitWord = unitMap[unitDigit]
-        if(unitWord.size() > 0) {
-            tenWords = tenMap[tenDigit] + " " + unitWord
-        } else {
-            tenWords = tenMap[tenDigit]
-        }
+        def doubleDigits = threeSet[1..2] as int
+
+        if(tenDigit > 1) {
+            unitWord = unitMap[unitDigit]
+
+            if (unitWord.size() > 0)
+                tenWords = tenMap[tenDigit] + " " + unitWord
+            else
+                tenWords = tenMap[tenDigit]
+
+        } // (tenDigit > 0)
+        else
+            tenWords = unitMap[doubleDigits]
 
         return tenWords
     }

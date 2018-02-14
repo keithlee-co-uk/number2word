@@ -116,7 +116,27 @@ class Number2WordTest extends Specification {
         "fifty five"  | "055"
         "sixty seven" | "067"
 
-/* If the tens and the units are both zero, no text is added. For any other value, the name of the one or two-digit number is added as a special case.*/
     }
 
+    def "If the tens and the units are both zero, no text is added."() {
+        expect:
+        n2w.tenWord(hundredSet) == words
+
+        where:
+        words    | hundredSet
+        ""       | "000"
+    }
+
+    def "For any other value, the name of the one or two-digit number is added as a special case."() {
+        /* Tens digit is 1 or 0 */
+        expect:
+        n2w.tenWord(hundredSet) == words
+
+        where:
+        words      | hundredSet
+        "five"     | "005"
+        "twelve"   | "012"
+        "nineteen" | "019"
+
+    }
 }
