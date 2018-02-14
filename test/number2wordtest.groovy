@@ -91,4 +91,17 @@ class Number2WordTest extends Specification {
         "nine hundred"  | "900"
     }
 
+    /* Tens Rule */
+    def "If the tens section of a three-digit group is two or higher, the appropriate '-ty' word is added to the text"() {
+        expect:
+        n2w.tyWord(hundredSet) == words
+
+        where:
+        words | hundredSet
+        "twenty"   | "020"
+        "thrity" | "030"
+        "ninety"  | "090"
+    }
+
+/* and followed by the name of the third digit (unless the third digit is a zero, which is ignored). If the tens and the units are both zero, no text is added. For any other value, the name of the one or two-digit number is added as a special case.*/
  }
