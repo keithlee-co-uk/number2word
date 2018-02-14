@@ -1,6 +1,7 @@
 
 class Number2Word {
-    def unitMap = ['', "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+    def unitMap = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+    def tenMap = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
 
     def number2Words(int number){
         if(number == 0){
@@ -39,6 +40,11 @@ class Number2Word {
         hundredthsWords = unitMap[hundredthDigit] + hundredthsWords
         return hundredthsWords
 
+    }
+
+    def tenWord(String threeSet) {
+        def tenDigit = threeSet[1..1] as int
+       return tenMap[tenDigit]
     }
 }
 
