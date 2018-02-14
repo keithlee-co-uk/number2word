@@ -1,34 +1,7 @@
 import spock.lang.Specification
 
-
-class Number2WordTest extends Specification {
+class AssumptionsTest extends Specification {
     def n2w = new Number2Word()
-
-    /** Zero Rule **/
-    def "Value is 0 then the words is 'zero' "() {
-        expect:
-        n2w.number2Words(digit) == word
-
-        where:
-        digit | word
-        0     | "zero"
-
-    }
-
-    /** Three Digit Rule **/
-    def "value is split into groups of three digits starting from the right-hand side"() {
-        expect:
-        n2w.splitToThreeDigits(integer) == stringList
-
-        where:
-        integer   | stringList
-        1         | ["001"]
-        50        | ["050"]
-        999       | ["999"]
-        1000      | ["000", "001"]
-        56945781  | ["781", "945", "056"]
-        999999999 | ["999", "999", "999"]
-    }
 
     /* Assumption 1 */
 
@@ -65,8 +38,42 @@ class Number2WordTest extends Specification {
         ex.message == 'Expected a positive integer less than a billion.'
     }
 
-    /** Hundreds Rule **/
-    /*  */
+}
+
+class ZeroRuleTest extends Specification {
+    def n2w = new Number2Word()
+
+    def "Value is 0 then the words is 'zero' "() {
+        expect:
+        n2w.number2Words(digit) == word
+
+        where:
+        digit | word
+        0     | "zero"
+
+    }
+}
+
+class ThreeDigitRuleTest extends Specification {
+    def n2w = new Number2Word()
+
+    def "value is split into groups of three digits starting from the right-hand side"() {
+        expect:
+        n2w.splitToThreeDigits(integer) == stringList
+
+        where:
+        integer   | stringList
+        1         | ["001"]
+        50        | ["050"]
+        999       | ["999"]
+        1000      | ["000", "001"]
+        56945781  | ["781", "945", "056"]
+        999999999 | ["999", "999", "999"]
+    }
+}
+
+class HundredsRuleTest extends Specification {
+    def n2w = new Number2Word()
 
     def "If the hundreds portion of a three-digit group is not zero, the number of hundreds is added as a word."() {
         /* If the three-digit group is not exactly divisible by one hundred, the text 'hundred and' is appended*/
@@ -92,8 +99,10 @@ class Number2WordTest extends Specification {
         "three hundred" | "300"
         "nine hundred"  | "900"
     }
+}
 
-    /* Tens Rule */
+class TensRuleTest extends Specification {
+    def n2w = new Number2Word()
 
     def "If the tens section of a three-digit group is two or higher, the appropriate '-ty' word is added to the text"() {
         expect:
