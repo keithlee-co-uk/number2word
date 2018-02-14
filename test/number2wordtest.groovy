@@ -166,8 +166,15 @@ class RecombinationRuleTest extends Specification {
     }
 
     /*
-    def "unless the group is blank and therefore not included at all. One exception is when the final group does not include any hundreds and there is more than one non-blank group. In this case, the final part is prepended with 'and'."() {
+    def "unless the group is blank and therefore not included at all. One exception is
+    **/
+    def "when the final group does not include any hundreds and there is more than one non-blank group. In this case, the final part is prepended with 'and'."() {
+        expect:
+        n2w.recombine(ThreeDigitGroups) == words
 
-    }**/
+        where:
+        ThreeDigitGroups | words
+        ["one", "nine hundred and forty five", "fifty six"] | "fifty six million nine hundred and forty five thousand and one"
+    }
 }
 
