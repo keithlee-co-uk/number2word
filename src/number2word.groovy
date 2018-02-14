@@ -43,8 +43,17 @@ class Number2Word {
     }
 
     def tenWord(String threeSet) {
+        def tenWords = ""
         def tenDigit = threeSet[1..1] as int
-       return tenMap[tenDigit]
+        def unitDigit = threeSet[2..2] as int
+        def unitWord = unitMap[unitDigit]
+        if(unitWord.size() > 0) {
+            tenWords = tenMap[tenDigit] + " " + unitWord
+        } else {
+            tenWords = tenMap[tenDigit]
+        }
+
+        return tenWords
     }
 }
 
