@@ -1,8 +1,12 @@
 
 class Number2Word {
-    def unitMap = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven",
-                   "twelve", "thirteen","fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
-    def tenMap = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+    ArrayList<String>  unitMap = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
+                             "eleven", "twelve", "thirteen","fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
+                             "nineteen"]
+
+    ArrayList<String>  tenMap = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+
+    ArrayList<String> largeNumberNameMap = ["", "thousand", "million"]
 
     def number2Words(int number){
         if(number == 0){
@@ -64,6 +68,22 @@ class Number2Word {
             tenWords = unitMap[doubleDigits]
 
         return tenWords
+    }
+
+    def recombine(List translations) {
+        def recombined = ""
+        def translationCount = 0
+
+        for(translation in translations) {
+            if(translationCount > 0)
+                recombined = translation + " " + largeNumberNameMap[translationCount] + " " + recombined
+            else
+                recombined = translation
+
+            translationCount += 1
+
+        }
+        return recombined
     }
 }
 

@@ -149,3 +149,25 @@ class TensRuleTest extends Specification {
 
     }
 }
+
+class RecombinationRuleTest extends Specification {
+    def n2w = new Number2Word()
+
+    /* When recombining the translated three-digit groups, */
+    def "each group except the last is followed by a large number name"() {
+        expect:
+        n2w.recombine(ThreeDigitGroups) == words
+
+        where:
+        ThreeDigitGroups | words
+        ["one hundred and five", "one"] | "one thousand one hundred and five"
+        ["and twenty one", "thirty"] | "thirty thousand and twenty one"
+        ["seven hundred and eighty one", "nine hundred and forty five", "fifty six"] | "fifty six million nine hundred and forty five thousand seven hundred and eighty one"
+    }
+
+    /*
+    def "unless the group is blank and therefore not included at all. One exception is when the final group does not include any hundreds and there is more than one non-blank group. In this case, the final part is prepended with 'and'."() {
+
+    }**/
+}
+
