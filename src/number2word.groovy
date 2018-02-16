@@ -73,8 +73,12 @@ class Number2Word {
 
         for(String translation in translations) {
 
-            if(translationCount > 0)
-                recombined = translation + " " + largeNumberNameMap[translationCount] + " " + recombined
+            if(translationCount > 0) {
+                boolean translationIsNotEmpty = translation?.trim()
+                if(translationIsNotEmpty == true) {
+                    recombined = translation + " " + largeNumberNameMap[translationCount] + " " + recombined
+                }
+            }
             else
             {
                 if(translations.size() > 1 && !translation.contains("hundred"))
