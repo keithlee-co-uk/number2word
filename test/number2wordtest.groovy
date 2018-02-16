@@ -161,7 +161,7 @@ class RecombinationRuleTest extends Specification {
         where:
         ThreeDigitGroups | words
         ["one hundred and five", "one"] | "one thousand one hundred and five"
-        ["and twenty one", "thirty"] | "thirty thousand and twenty one"
+        ["twenty one", "thirty"] | "thirty thousand and twenty one"
         ["seven hundred and eighty one", "nine hundred and forty five", "fifty six"] | "fifty six million nine hundred and forty five thousand seven hundred and eighty one"
     }
 

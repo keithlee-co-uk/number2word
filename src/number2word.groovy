@@ -75,10 +75,16 @@ class Number2Word {
         def translationCount = 0
 
         for(translation in translations) {
+
             if(translationCount > 0)
                 recombined = translation + " " + largeNumberNameMap[translationCount] + " " + recombined
             else
+            {
+                if(translations.size() > 1 && !translation.contains("hundred"))
+                    translation = "and " + translation
+
                 recombined = translation
+            }
 
             translationCount += 1
 
