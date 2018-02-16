@@ -82,6 +82,7 @@ class HundredsRuleTest extends Specification {
 
         where:
         word                | hundredSet
+        ""                  | "000"
         ""                  | "001"
         "nine hundred and"  | "999"
         "seven hundred and" | "781"
@@ -175,6 +176,7 @@ class RecombinationRuleTest extends Specification {
 
         where:
         ThreeDigitGroups | words
+        ["one", "", "fifty six"] | "fifty six million and one"
         ["one", "nine hundred and forty five", "fifty six"] | "fifty six million nine hundred and forty five thousand and one"
     }
 }
@@ -188,11 +190,11 @@ class TransformationTest extends Specification {
 
     where:
     digits      | words
+    200000002   | "two million and two"
     999999999   | "nine hundred and ninety nine million nine hundred and ninety nine thousand nine hundred and ninety nine"
     0           | "zero"
     20          | "twenty"
     1001        | "one thousand and one"
-    200000002   | "two million and two"
     }
 }
 

@@ -34,8 +34,11 @@ class Number2Word {
         def hundredthsWords = ""
         def hundredthDigit = threeSet.substring(0, 1) as int
 
-        if((threeSet as int).mod(100) == 0)
-            hundredthsWords = " hundred"
+        if((threeSet as int).mod(100) == 0) {
+            if((threeSet as int) > 0) {
+                hundredthsWords = " hundred"
+            }
+        }
         else if(hundredthDigit > 0)
             hundredthsWords = " hundred and"
 
