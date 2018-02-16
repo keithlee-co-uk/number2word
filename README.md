@@ -1,5 +1,5 @@
 # number2word
-convert digits to English words (TDD practice &amp; learning)
+convert digits to English words (TDD practice and learning)
 
 ## Premise 
 * Take a 'number' up to 999,999,999, as input.

@@ -7,7 +7,7 @@ class AssumptionsTest extends Specification {
 
     def "Throw Exception when 'number' is not an integer"() {
         when:
-        n2w.number2Words("Fred")
+        n2w.transform("Fred")
 
         then:
         thrown(MissingMethodException)
@@ -18,7 +18,7 @@ class AssumptionsTest extends Specification {
 
     def "Throw NumberOutOfBounds Exception when 'number' is negative"() {
         when:
-        n2w.number2Words(-1)
+        n2w.validate(-1)
 
         then:
         NumberOutOfBounds ex = thrown()
@@ -30,7 +30,7 @@ class AssumptionsTest extends Specification {
     def "Throw NumberOutOfBounds exception for values over a billion"() {
 
         when:
-        n2w.number2Words(1000000000)
+        n2w.validate(1000000000)
 
         then:
         NumberOutOfBounds ex = thrown()
@@ -45,7 +45,7 @@ class ZeroRuleTest extends Specification {
 
     def "Value is 0 then the words is 'zero' "() {
         expect:
-        n2w.number2Words(digit) == word
+        n2w.transform(digit) == word
 
         where:
         digit | word
@@ -163,6 +163,7 @@ class RecombinationRuleTest extends Specification {
         ["one hundred and five", "one"] | "one thousand one hundred and five"
         ["twenty one", "thirty"] | "thirty thousand and twenty one"
         ["seven hundred and eighty one", "nine hundred and forty five", "fifty six"] | "fifty six million nine hundred and forty five thousand seven hundred and eighty one"
+        ["one", "", "one"] | "one million and one"
     }
 
     /*
@@ -175,6 +176,23 @@ class RecombinationRuleTest extends Specification {
         where:
         ThreeDigitGroups | words
         ["one", "nine hundred and forty five", "fifty six"] | "fifty six million nine hundred and forty five thousand and one"
+    }
+}
+
+class TransformationTest extends Specification {
+    def n2w = new Number2Word()
+
+    def "Transform a series of digits to the equivalent number in British English words"() {
+    expect:
+    n2w.transform(digits) == words
+
+    where:
+    digits      | words
+    999999999   | "nine hundred and ninety nine million nine hundred and ninety nine thousand nine hundred and ninety nine"
+    0           | "zero"
+    20          | "twenty"
+    1001        | "one thousand and one"
+    200000002   | "two million and two"
     }
 }
 

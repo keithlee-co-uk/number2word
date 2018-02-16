@@ -8,21 +8,18 @@ class Number2Word {
 
     ArrayList<String> largeNumberNameMap = ["", "thousand", "million"]
 
-    def number2Words(int number){
-        if(number == 0){
-            return "zero"
-        }
 
+    def validate(int number){
         if(number > 999999999 || number < 0) {
             throw new NumberOutOfBounds('Expected a positive integer less than a billion.')
         }
 
     }
 
-    def splitToThreeDigits(int number) {
+    def splitToThreeDigits(int digits) {
         def hundredGroups = []
         // TODO: breakout regex to clearer/explicitly named method eg matchThree()
-        def hundredGroupsReversed = number.toString().reverse().split("(?<=\\G...)")
+        def hundredGroupsReversed = digits.toString().reverse().split("(?<=\\G...)")
 
         for(numberSet in hundredGroupsReversed) {
             if (numberSet.size() < 3) {
@@ -74,7 +71,7 @@ class Number2Word {
         def recombined = ""
         def translationCount = 0
 
-        for(translation in translations) {
+        for(String translation in translations) {
 
             if(translationCount > 0)
                 recombined = translation + " " + largeNumberNameMap[translationCount] + " " + recombined
@@ -90,6 +87,33 @@ class Number2Word {
 
         }
         return recombined
+    }
+
+    def transform(int digits) {
+        if(digits == 0){
+            return "zero"
+        }
+
+        ArrayList<String> translations = []
+        String setTranslation
+
+        def threeSets = this.splitToThreeDigits(digits)
+
+        for(hundredSet in threeSets){
+            def hundreds = this.hundredthsWord(hundredSet)
+            def tens = this.tenWord(hundredSet)
+
+            if(hundreds.size() > 0 && tens.size() > 0) {
+                setTranslation = hundreds + " " + tens
+            } else {
+                setTranslation = hundreds + tens
+            }
+            translations.add(setTranslation)
+        }
+
+        return this.recombine(translations)
+
+
     }
 }
 
