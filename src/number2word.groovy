@@ -35,9 +35,12 @@ class Number2Word {
         def hundredthDigit = threeSet.substring(0, 1) as int
 
         if((threeSet as int).mod(100) == 0) {
-            if((threeSet as int) > 0) {
-                hundredthsWords = " hundred"
-            }
+
+            if(threeSet as int == 0)
+                return ""
+
+            hundredthsWords = " hundred"
+
         }
         else if(hundredthDigit > 0)
             hundredthsWords = " hundred and"
@@ -79,12 +82,15 @@ class Number2Word {
             if(translationCount > 0) {
                 boolean translationIsNotEmpty = translation?.trim()
                 if(translationIsNotEmpty == true) {
-                    recombined = translation + " " + largeNumberNameMap[translationCount] + " " + recombined
+                    if(recombined == "")
+                        recombined = translation + " " + largeNumberNameMap[translationCount]
+                    else
+                        recombined = translation + " " + largeNumberNameMap[translationCount] + " " + recombined
                 }
             }
             else
             {
-                if(translations.size() > 1 && !translation.contains("hundred"))
+                if(translations.size() > 1 && !translation.contains("hundred") && translation != "")
                     translation = "and " + translation
 
                 recombined = translation
